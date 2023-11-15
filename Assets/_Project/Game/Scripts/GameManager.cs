@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float TimeBtwTicks = 0.2f;
     [SerializeField] private float speed;
 
+    private bool canTick = false;
+
     public static event EventHandler OnTick;
 
     private int tick;
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!canTick) return;
+
         tickTimer += Time.deltaTime;
         if(tickTimer > TimeBtwTicks)
         {
@@ -30,5 +34,10 @@ public class GameManager : MonoBehaviour
             tick++;
             OnTick?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public void SwitchTick(bool tick)
+    {
+        canTick = tick;
     }
 }

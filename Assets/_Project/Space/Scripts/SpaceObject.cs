@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceObject : MonoBehaviour
 {
-    void Update()
+    public virtual void Update()
     {
         transform.Translate(-transform.forward * GameManager.SPEED * Time.deltaTime);
     }

@@ -1,23 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class BasicEnemy : SpaceObject
+public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private float TimeBtwShoots = .75f;
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform shootPosition;
+    [SerializeField] private float fireRate = 2;
 
-    private float timer;
+    private float nextTimeToFire = 0;
 
-    public override void Update()
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        base.Update();
-
-        timer += Time.deltaTime;
-        if(timer > TimeBtwShoots)
+        if(ctx.started && Time.time >= nextTimeToFire)
         {
-            timer = 0;
+            nextTimeToFire = 1 / fireRate;
             Shoot();
         }
     }
