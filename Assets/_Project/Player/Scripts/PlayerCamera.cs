@@ -13,6 +13,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(target == null) return;
+
         Vector3 localOffset = offset;
 
         // Rotate the offset according to the target's rotation

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float speed;
 
     private bool canTick = false;
+    private bool hasStarted = false;
 
     public static event EventHandler OnTick;
     public static event EventHandler OnStartGame;
@@ -19,9 +20,31 @@ public class GameManager : MonoBehaviour
     private int tick;
     private float tickTimer;
 
+    private int playersAmount = 0;
+    private int playersDead = 0;
+
     private void Awake()
     {
         SPEED = speed;
+    }
+
+    private void OnEnable()
+    {
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
+    {
+        playersDead++;
+        if(playersDead >= playersAmount)
+        {
+            SwitchTick(false);
+        }
     }
 
     private void Update()
@@ -39,6 +62,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame ()
     {
+        playersAmount++;
+
+        if(hasStarted) return;
+
         SwitchTick(true);
         OnStartGame?.Invoke(this, EventArgs.Empty);
     }

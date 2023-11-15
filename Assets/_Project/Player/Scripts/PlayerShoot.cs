@@ -13,6 +13,8 @@ public class PlayerShoot : MonoBehaviour
     private float nextTimeToFire = 0;
     private bool hasShoot = false;
 
+    private bool isDead = false;
+
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if(ctx.started)
@@ -27,6 +29,8 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
+
         if(hasShoot)
         {
             if(Time.time >= nextTimeToFire)
@@ -40,5 +44,10 @@ public class PlayerShoot : MonoBehaviour
     {
         Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
         nextTimeToFire = Time.time + 1 / fireRate;
+    }
+
+    public void SwithDead(bool value)
+    {
+        isDead = value;
     }
 }

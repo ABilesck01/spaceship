@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(0f, 360f)] float orbitAngle;
 
     private Vector2 moveInput;
+    private bool canMove = true;
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(!canMove) return; 
+
         Vector3 look = transform.position - ship.position;
         ship.transform.up = look;
 
@@ -31,8 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 newPosition = new Vector3(x, z, 0);
         ship.MovePosition(newPosition);
+    }
 
-        //Quaternion lookRotation = Quaternion.LookRotation(Vector3.zero - ship.position);
-        //ship.MoveRotation(Quaternion.Slerp(ship.rotation, lookRotation, rotation * Time.deltaTime));
+    public void SwitchMove(bool value)
+    {
+        canMove = value;
     }
 }
