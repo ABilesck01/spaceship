@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private bool canTick = false;
 
     public static event EventHandler OnTick;
+    public static event EventHandler OnStartGame;
 
     private int tick;
     private float tickTimer;
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartGame ()
+    {
+        SwitchTick(true);
+        OnStartGame?.Invoke(this, EventArgs.Empty);
+    }
     public void SwitchTick(bool tick)
     {
         canTick = tick;

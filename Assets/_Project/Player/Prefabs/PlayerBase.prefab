@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3047586276056956735, guid: 405fd6c000ff83647ab05014feb306b7, type: 3}
   shootPosition: {fileID: 1495510605078299818}
-  fireRate: 1
+  fireRate: 2.5
 --- !u!1 &3537928480002314497
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 7333379240439011440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.329, z: 1.13}
+  m_LocalPosition: {x: 0, y: 0.329, z: 1.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

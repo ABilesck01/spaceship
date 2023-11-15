@@ -13,6 +13,17 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
-        rb.AddForce(transform.forward * 10, ForceMode.Impulse);
+        rb.AddForce(transform.forward * 30, ForceMode.Impulse);
+        Destroy(gameObject, 5);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent(out IHealth health))
+        {
+            health.TakeDamage(1);
+        }
+
+        Destroy(gameObject);
     }
 }
