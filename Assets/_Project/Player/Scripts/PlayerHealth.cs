@@ -14,6 +14,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private float healAmount = 3;
     [SerializeField] private int medkitAmount = 3;
     [SerializeField] private TextMeshProUGUI txtMedkit;
+    [Space]
+    [SerializeField] private GameObject explosion;
+    [SerializeField] private AudioSource explosionAudio;
+
     private float currentHealth;
 
     public static event EventHandler OnPlayerDeath;
@@ -37,11 +41,14 @@ public class PlayerHealth : MonoBehaviour, IHealth
         healthBar.value = currentHealth;
         if(currentHealth <= 0)
         {
+            explosionAudio.Play();
+
             GetComponentInParent<PlayerMovement>().SwitchMove(false);
             GetComponentInParent<PlayerShoot>().SwithDead(false);
             OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            
             Destroy(gameObject);
-
         }
 
     }

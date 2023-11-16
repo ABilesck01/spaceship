@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public static event EventHandler OnTick;
     public static event EventHandler OnStartGame;
+    public static event EventHandler OnGameOver;
 
     private int tick;
     private float tickTimer;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         if(playersDead >= playersAmount)
         {
             SwitchTick(false);
+            OnGameOver?.Invoke(this, EventArgs.Empty);
         }
     }
 
