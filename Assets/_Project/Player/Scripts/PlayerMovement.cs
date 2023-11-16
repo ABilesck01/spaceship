@@ -9,9 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float radius = 3;
     [SerializeField] private float rotation = 10;
     [SerializeField] private Rigidbody ship;
-    [Space]
-    [SerializeField, Range(0f, 360f)] float orbitAngle;
 
+    private float orbitAngle = 270;
     private Vector2 moveInput;
     private bool canMove = true;
 

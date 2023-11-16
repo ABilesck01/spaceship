@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a0b82e08bb62b4ca40be46c7ad75ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 20
   health: 2
   TimeBtwShoots: 1
   projectilePrefab: {fileID: 5241458377366993529, guid: 12921fe2f01802547b71581d39308825, type: 3}

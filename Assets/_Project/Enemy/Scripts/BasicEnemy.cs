@@ -27,6 +27,11 @@ public class BasicEnemy : SpaceObject, IHealth
         {
             health.TakeDamage(1);
         }
+
+        if (other.TryGetComponent(out Projectile projectile))
+        {
+            GameManager.Current.Score += score;
+        }
     }
 
     public override void Update()
