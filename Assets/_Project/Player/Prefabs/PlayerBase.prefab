@@ -177,7 +177,6 @@ MonoBehaviour:
   radius: 3
   rotation: 5
   ship: {fileID: 8888484811654330943}
-  orbitAngle: 270
 --- !u!114 &6849921284537525591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +193,7 @@ MonoBehaviour:
   shootPosition: {fileID: 1495510605078299818}
   fireRate: 2.5
   shootSound: {fileID: 3979264715036780364}
+  projectileAmount: 5
 --- !u!82 &3979264715036780364
 AudioSource:
   m_ObjectHideFlags: 0
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 8888484811654330943}
   - component: {fileID: 7080989522820413021}
   - component: {fileID: 9102241066088307402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: craft_speederA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1495510605078299818}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: shootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

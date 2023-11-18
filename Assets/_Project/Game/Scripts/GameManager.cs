@@ -8,13 +8,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static float SPEED;
-    private float score;
 
     [SerializeField] private float TimeBtwTicks = 0.2f;
     [SerializeField] private float speed;
     [Space]
     [SerializeField] private TextMeshProUGUI txtScore;
 
+    private float score;
     private bool canTick = false;
     private bool hasStarted = false;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             score = value;
             txtScore.text = score.ToString("###,###,#00");
 
-            if(score % 1000 == 0 && score != 0)
+            if(score % 100 == 0 && score != 0)
             {
                 OnBossFight?.Invoke(this, EventArgs.Empty);
                 SwitchTick(false);
