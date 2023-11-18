@@ -12,6 +12,10 @@ public class PlayerShoot : MonoBehaviour
     [Space]
     [SerializeField] private AudioSource shootSound;
 
+    [SerializeField] private int projectileAmount = 1;
+
+    private Transform shipPosition;
+
     private float nextTimeToFire = 0;
     private bool hasShoot = false;
 
@@ -29,6 +33,11 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        shipPosition = shootPosition.parent;
+    }
+
     private void Update()
     {
         if (isDead) return;
@@ -44,7 +53,18 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
+        for (int i = 0; i < projectileAmount; i++)
+        {
+            float angle = shipPosition.eulerAngles.z;
+            float xOffset = i - (projectileAmount - 1) / 2.0f;
+
+            Vector3 offset = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle) * xOffset, Mathf.Sin(Mathf.Deg2Rad * angle) * xOffset, 0);
+            Vector3 spawnPosition = shootPosition.position + offset;
+
+            Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
+        }
+
+        //Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
         shootSound.Play();
         nextTimeToFire = Time.time + 1 / fireRate;
     }

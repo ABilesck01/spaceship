@@ -7,11 +7,14 @@ public class BossShoot : MonoBehaviour
     [SerializeField] private float TimeBtwShoots = .75f;
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform shootPosition;
+    [SerializeField] private LayerMask player;
 
     private float timer;
 
     public void Update()
     {
+
+
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
