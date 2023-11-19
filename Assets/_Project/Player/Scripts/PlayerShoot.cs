@@ -9,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform shootPosition;
     [SerializeField] private float fireRate = 2;
+    [SerializeField] private float damage = 1;
     [Space]
     [SerializeField] private AudioSource shootSound;
 
@@ -64,7 +65,6 @@ public class PlayerShoot : MonoBehaviour
             Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
         }
 
-        //Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
         shootSound.Play();
         nextTimeToFire = Time.time + 1 / fireRate;
     }
@@ -72,5 +72,20 @@ public class PlayerShoot : MonoBehaviour
     public void SwithDead(bool value)
     {
         isDead = value;
+    }
+
+    public void UpgradeCannon(int level)
+    {
+        projectileAmount = level;
+    }
+
+    public void UpgradeFireRate(int level)
+    {
+        fireRate += (level * 0.1f);
+    }
+
+    public void UpgradeDamage(int level)
+    {
+        damage = level;
     }
 }
