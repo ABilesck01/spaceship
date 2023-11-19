@@ -17,6 +17,7 @@ public class BasicEnemy : SpaceObject, IHealth
         health -= damage;
         if(health <= 0) 
         {
+            GameManager.Current.Score += score;
             Destroy(gameObject);
         }
     }
@@ -26,11 +27,6 @@ public class BasicEnemy : SpaceObject, IHealth
         if (other.TryGetComponent(out IHealth health))
         {
             health.TakeDamage(1);
-        }
-
-        if (other.TryGetComponent(out Projectile projectile))
-        {
-            GameManager.Current.Score += score;
         }
     }
 

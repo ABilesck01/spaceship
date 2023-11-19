@@ -26,12 +26,12 @@ public class BossHealth : MonoBehaviour, IHealth
         healthBar.value = health;
         if (health <= 0)
         {
-            explosionAudio.Play();
-
             OnBossDeath?.Invoke(this, EventArgs.Empty);
+            explosionAudio.Play();
             Instantiate(explosion, transform.position, Quaternion.identity);
-
-            Destroy(transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
+
+    
 }

@@ -13,16 +13,27 @@ public class SpaceObject : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
-        if (other.TryGetComponent(out IHealth health))
+        //if (other.TryGetComponent(out IHealth health))
+        //{
+        //    health.TakeDamage(1);
+        //}
+
+        if (other.TryGetComponent(out PlayerProjectile projectile))
         {
-            health.TakeDamage(1);
+            DestroyObject(true);
+            return;
         }
+        DestroyObject(false);
+    }
 
-        if(other.TryGetComponent(out Projectile projectile))
+    public void DestroyObject(bool willScore)
+    {
+        if(willScore)
         {
             GameManager.Current.Score += score;
         }
+        Destroy(gameObject);
     }
 }

@@ -25,6 +25,13 @@ public class BossShoot : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
+        try
+        {
+            Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
+        }
+        catch (System.Exception)
+        {
+
+        }
     }
 }

@@ -189,11 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89c069bbc0e57245972795d83bf225e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3047586276056956735, guid: 405fd6c000ff83647ab05014feb306b7, type: 3}
+  projectilePrefab: {fileID: -2500125661508193765, guid: 405fd6c000ff83647ab05014feb306b7, type: 3}
   shootPosition: {fileID: 1495510605078299818}
   fireRate: 2.5
   shootSound: {fileID: 3979264715036780364}
-  projectileAmount: 5
+  projectileAmount: 1
 --- !u!82 &3979264715036780364
 AudioSource:
   m_ObjectHideFlags: 0

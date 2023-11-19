@@ -8,6 +8,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private float radius = 3;
     [SerializeField] private float rotation = 5;
     [SerializeField] private Rigidbody ship;
+    [Space]
+    [SerializeField] private AudioClip explosionClip;
 
     private float currentAngle;
     private float targetAngle;
@@ -17,6 +19,26 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         GetTargetAngle();
+    }
+
+    private void OnEnable()
+    {
+        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+    }
+
+    private void OnDisable()
+    {
+        BossHealth.OnBossDeath -= BossHealth_OnBossDeath;
+    }
+
+    private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
+    {
+        Invoke(nameof(DestroyObject), 1f);
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(gameObject); 
     }
 
     private void GetTargetAngle()
@@ -48,19 +70,27 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        if(isOnPosition)
+        try
         {
-            Invoke(nameof(SwitchPosition), 2f);
+            if (isOnPosition)
+            {
+                Invoke(nameof(SwitchPosition), 2f);
+            }
+
+            Move();
+
+            Vector3 look = transform.position - ship.position;
+            //ship.transform.up = look;
+
+            currentAngle = (currentAngle + moveAxis * Time.deltaTime * speed) % 360;
+
+            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        }
+        catch (System.Exception)
+        {
         }
 
-        Move();
-
-        Vector3 look = transform.position - ship.position;
-        //ship.transform.up = look;
-
-        currentAngle = (currentAngle + moveAxis * Time.deltaTime * speed) % 360;
-
-        transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        
     }
 
     private void SwitchPosition()
