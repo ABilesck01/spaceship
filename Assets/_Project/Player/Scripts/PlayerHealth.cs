@@ -27,6 +27,21 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if (ctx.started) Heal();
     }
 
+    private void OnEnable()
+    {
+        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+    }
+
+    private void OnDisable()
+    {
+        BossHealth.OnBossDeath -= BossHealth_OnBossDeath;
+    }
+
+    private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
+    {
+        medkitAmount = 3;
+    }
+
     private void Awake()
     {
         currentHealth = MaxHeath;
