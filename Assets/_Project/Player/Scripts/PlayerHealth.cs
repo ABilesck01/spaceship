@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private float MaxHeath;
     [SerializeField] private Slider healthBar;
+    [Header("Charged shield")]
+    [SerializeField] private float shieldDecreaseRate;
+    [SerializeField] private Slider shieldBar;
     [Space]
     [SerializeField] private float healAmount = 3;
     [SerializeField] private int medkitAmount = 3;
@@ -19,6 +22,17 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private AudioSource explosionAudio;
 
     private float currentHealth;
+    private float currentShield;
+
+    public float CurrentShield 
+    { 
+        get => currentShield; 
+        set
+        {
+            currentShield = value;
+            shieldBar.value = currentShield;
+        } 
+    }
 
     public static event EventHandler OnPlayerDeath;
 
@@ -40,6 +54,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
     {
         medkitAmount = 3;
+        txtMedkit.text = medkitAmount.ToString();
     }
 
     private void Awake()
@@ -47,11 +62,24 @@ public class PlayerHealth : MonoBehaviour, IHealth
         currentHealth = MaxHeath;
         healthBar.maxValue = currentHealth;
         healthBar.value = currentHealth;
+        shieldBar.maxValue = MaxHeath;
+        shieldBar.value = 0;
         txtMedkit.text = medkitAmount.ToString();
+    }
+
+    private void Update()
+    {
+        DecreaseShield();
     }
 
     public void TakeDamage(float damage)
     {
+        if(CurrentShield > 0)
+        {
+            CurrentShield -= damage;
+            return;
+        }
+
         currentHealth -= damage;
         healthBar.value = currentHealth;
         if(currentHealth <= 0)
@@ -79,5 +107,23 @@ public class PlayerHealth : MonoBehaviour, IHealth
         healthBar.value = currentHealth;
         if (currentHealth > MaxHeath)
             currentHealth = MaxHeath;
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = MaxHeath;
+        healthBar.value = currentHealth;
+    }
+
+    public void ChargedShield()
+    {
+        CurrentShield = MaxHeath;
+    }
+
+    private void DecreaseShield()
+    {
+        if(CurrentShield <= 0) return;
+
+        CurrentShield -= Time.deltaTime * shieldDecreaseRate;
     }
 }

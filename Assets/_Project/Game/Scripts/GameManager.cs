@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static float SPEED;
+    public static int LEVEL = 0;
 
     [SerializeField] private float TimeBtwTicks = 0.2f;
     [SerializeField] private float speed;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private int playersAmount = 0;
     private int playersDead = 0;
+    private int playersUpgrade = 0;
 
     public static GameManager Current;
 
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SPEED = speed;
+        LEVEL = 0;
         Current = this;
     }
 
@@ -59,12 +62,14 @@ public class GameManager : MonoBehaviour
     {
         PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
         BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        PlayerUpgradesController.OnSelectUpgrade += PlayerUpgradesController_OnSelectUpgrade;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
         BossHealth.OnBossDeath -= BossHealth_OnBossDeath;
+        PlayerUpgradesController.OnSelectUpgrade -= PlayerUpgradesController_OnSelectUpgrade;
     }
 
     private void PlayerHealth_OnPlayerDeath(object sender, EventArgs e)
@@ -79,7 +84,17 @@ public class GameManager : MonoBehaviour
 
     private void BossHealth_OnBossDeath(object sender, EventArgs e)
     {
-        SwitchTick(true);
+        playersUpgrade = 0;
+        LEVEL++;
+    }
+
+    private void PlayerUpgradesController_OnSelectUpgrade(object sender, EventArgs e)
+    {
+        playersUpgrade++;
+        if (playersUpgrade >= playersAmount)
+        {
+            SwitchTick(true);
+        }
     }
 
     private void Update()

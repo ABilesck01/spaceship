@@ -81,7 +81,7 @@ public class PlayerShoot : MonoBehaviour
 
     public void UpgradeFireRate(int level)
     {
-        fireRate += (level * 0.1f);
+        fireRate += (level * 0.2f);
     }
 
     public void UpgradeDamage(int level)

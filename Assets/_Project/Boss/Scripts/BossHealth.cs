@@ -16,6 +16,8 @@ public class BossHealth : MonoBehaviour, IHealth
 
     private void Awake()
     {
+        health += health * GameManager.LEVEL * 0.5f;
+
         healthBar.maxValue = health;
         healthBar.value = health;
     }
