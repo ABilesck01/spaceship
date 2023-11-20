@@ -62,7 +62,8 @@ public class PlayerShoot : MonoBehaviour
             Vector3 offset = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle) * xOffset, Mathf.Sin(Mathf.Deg2Rad * angle) * xOffset, 0);
             Vector3 spawnPosition = shootPosition.position + offset;
 
-            Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
+            var projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
+            projectile.Damage = damage;
         }
 
         shootSound.Play();

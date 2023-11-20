@@ -5,6 +5,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody rb;
+    private float damage;
+
+    public float Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
 
     private void Awake()
     {
@@ -21,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.TryGetComponent(out IHealth health))
         {
-            health.TakeDamage(1);
+            health.TakeDamage(damage);
         }
 
         Destroy(gameObject);

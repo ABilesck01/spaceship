@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -42,7 +39,7 @@ public class GameManager : MonoBehaviour
             score = value;
             txtScore.text = score.ToString("###,###,#00");
 
-            if(score % 100 == 0 && score != 0)
+            if(score % 1000 == 0 && score != 0)
             {
                 OnBossFight?.Invoke(this, EventArgs.Empty);
                 SwitchTick(false);

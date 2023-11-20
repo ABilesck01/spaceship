@@ -32,7 +32,8 @@ public class BossShoot : MonoBehaviour
     {
         try
         {
-            Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
+            var projectile = Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
+            projectile.Damage = damage;
         }
         catch (System.Exception)
         {
