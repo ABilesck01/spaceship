@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float TimeBtwTicks = 0.2f;
     [SerializeField] private float speed;
+    [SerializeField] private VisualEffect warp;
     [Space]
     [SerializeField] private TextMeshProUGUI txtScore;
 
     private float score;
+    private float scoreToBoss;
     private bool canTick = false;
     private bool hasStarted = false;
 
@@ -37,10 +40,12 @@ public class GameManager : MonoBehaviour
         set
         {
             score = value;
+            scoreToBoss = score;
             txtScore.text = score.ToString("###,###,#00");
 
-            if(score % 1000 == 0 && score != 0)
+            if(scoreToBoss >= 1000 && score != 0)
             {
+                Debug.Log("Boss fight");
                 OnBossFight?.Invoke(this, EventArgs.Empty);
                 SwitchTick(false);
             }
@@ -81,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     private void BossHealth_OnBossDeath(object sender, EventArgs e)
     {
+        scoreToBoss = 0;
         playersUpgrade = 0;
         LEVEL++;
     }
@@ -120,5 +126,7 @@ public class GameManager : MonoBehaviour
     public void SwitchTick(bool tick)
     {
         canTick = tick;
+        float warpSpeed = tick ? 1 : 0;
+        warp.SetFloat("WarpAmount", warpSpeed);
     }
 }

@@ -54,20 +54,26 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        for (int i = 0; i < projectileAmount; i++)
+        try
         {
-            float angle = shipPosition.eulerAngles.z;
-            float xOffset = i - (projectileAmount - 1) / 2.0f;
+            for (int i = 0; i < projectileAmount; i++)
+            {
+                float angle = shipPosition.eulerAngles.z;
+                float xOffset = i - (projectileAmount - 1) / 2.0f;
 
-            Vector3 offset = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle) * xOffset, Mathf.Sin(Mathf.Deg2Rad * angle) * xOffset, 0);
-            Vector3 spawnPosition = shootPosition.position + offset;
+                Vector3 offset = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle) * xOffset, Mathf.Sin(Mathf.Deg2Rad * angle) * xOffset, 0);
+                Vector3 spawnPosition = shootPosition.position + offset;
 
-            var projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
-            projectile.Damage = damage;
+                var projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
+                projectile.Damage = damage;
+            }
+
+            shootSound.Play();
+            nextTimeToFire = Time.time + 1 / fireRate;
         }
-
-        shootSound.Play();
-        nextTimeToFire = Time.time + 1 / fireRate;
+        catch (Exception)
+        {
+        }
     }
 
     public void SwithDead(bool value)

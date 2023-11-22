@@ -17,7 +17,7 @@ GameObject:
   m_Layer: 0
   m_Name: PlayerBase
   m_TagString: Untagged
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8145581723421987857}
   - {fileID: 961459007390244342}
@@ -242,7 +242,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: -2500125661508193765, guid: 405fd6c000ff83647ab05014feb306b7, type: 3}
   shootPosition: {fileID: 1495510605078299818}
   fireRate: 2.5
-  damage: 0
+  damage: 1
   shootSound: {fileID: 3979264715036780364}
   projectileAmount: 1
 --- !u!82 &3979264715036780364
@@ -1713,7 +1713,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9999999, y: 0.79999995, z: 2.1}
+  m_Size: {x: 1.5, y: 0.79999995, z: 2.1}
   m_Center: {x: 0, y: 0.39999998, z: 0}
 --- !u!114 &9102241066088307402
 MonoBehaviour:
