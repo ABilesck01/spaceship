@@ -32,7 +32,10 @@ public class SpaceObject : MonoBehaviour
     {
         if(willScore)
         {
-            GameManager.Current.Score += score;
+            if(GameManager.Current != null)
+                GameManager.Current.Score += (int)score;
+            else
+                CampaingManager.Current.Score += (int)score;
         }
         Destroy(gameObject);
     }

@@ -36,11 +36,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public static event EventHandler OnPlayerDeath;
 
-    public void OnHealInput(InputAction.CallbackContext ctx)
-    {
-        if (ctx.started) Heal();
-    }
-
     private void OnEnable()
     {
         BossHealth.OnBossDeath += BossHealth_OnBossDeath;
@@ -59,6 +54,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private void Awake()
     {
+        if (healthBar == null || shieldBar == null) return;
+
         currentHealth = MaxHeath;
         healthBar.maxValue = currentHealth;
         healthBar.value = currentHealth;
@@ -96,7 +93,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     }
 
-    private void Heal()
+    public void Heal()
     {
         if (currentHealth >= MaxHeath) return;
         if (medkitAmount <= 0) return;
@@ -125,5 +122,20 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if(CurrentShield <= 0) return;
 
         CurrentShield -= Time.deltaTime * shieldDecreaseRate;
+    }
+
+    public void SetView(Slider health, Slider shield, TextMeshProUGUI medkit, AudioSource kaboom)
+    {
+        healthBar = health;
+        shieldBar = shield;
+        txtMedkit = medkit;
+        explosionAudio = kaboom;
+
+        currentHealth = MaxHeath;
+        healthBar.maxValue = currentHealth;
+        healthBar.value = currentHealth;
+        shieldBar.maxValue = MaxHeath;
+        shieldBar.value = 0;
+        txtMedkit.text = medkitAmount.ToString();
     }
 }

@@ -10,7 +10,6 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float smoothRotation = 0.125f;
     [SerializeField] private Vector3 offset;
 
-
     private void FixedUpdate()
     {
         if(target == null) return;
@@ -28,5 +27,10 @@ public class PlayerCamera : MonoBehaviour
         Quaternion desiredRot = target.rotation;
         Quaternion smoothRot = Quaternion.Lerp(transform.rotation, desiredRot, smoothRotation);
         transform.rotation = smoothRot;
+    }
+
+    public void OnSelectShip(Transform t)
+    {
+        target = t;
     }
 }

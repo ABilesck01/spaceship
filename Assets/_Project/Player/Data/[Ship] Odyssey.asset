@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ba20a0d5f61694cbb8359402b04668, type: 3}
+  m_Name: '[Ship] Odyssey'
+  m_EditorClassIdentifier: 
+  shipName: Odyssey
+  ship: {fileID: 7575566671462347348, guid: 369199bdb2d8cdf4496aa39281cfa7cc, type: 3}
+  shipPrefab: {fileID: 7575566671462347348, guid: 27688d29fc5d21949b22096c2ef4bfb4, type: 3}

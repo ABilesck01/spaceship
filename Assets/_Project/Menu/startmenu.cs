@@ -9,13 +9,15 @@ public class startmenu : MonoBehaviour
     [SerializeField] private GameObject endFirstSelected;
     private void OnEnable()
     {
-        GameManager.OnStartGame += GameManager_OnStartGame;
+        GameManager.OnPlayerEnter += GameManager_OnStartGame;
+        CampaingManager.OnPlayerEnter += GameManager_OnStartGame;
         GameManager.OnGameOver += GameManager_OnGameOver;
     }
 
     private void OnDisable()
     {
-        GameManager.OnStartGame -= GameManager_OnStartGame;
+        GameManager.OnPlayerEnter -= GameManager_OnStartGame;
+        CampaingManager.OnPlayerEnter -= GameManager_OnStartGame;
         GameManager.OnGameOver -= GameManager_OnGameOver;
     }
 
@@ -33,5 +35,10 @@ public class startmenu : MonoBehaviour
     public void BtnRestartClick()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BtnQuitClick()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 }

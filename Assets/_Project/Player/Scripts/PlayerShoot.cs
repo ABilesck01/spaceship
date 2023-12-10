@@ -19,11 +19,14 @@ public class PlayerShoot : MonoBehaviour
 
     private float nextTimeToFire = 0;
     private bool hasShoot = false;
+    private bool canShoot = false;
 
     private bool isDead = false;
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (!canShoot) return;
+
         if(ctx.started)
         {
             hasShoot = true;
@@ -34,10 +37,10 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        shipPosition = shootPosition.parent;
-    }
+    //private void Start()
+    //{
+    //    shipPosition = shootPosition.parent;
+    //}
 
     private void Update()
     {
@@ -94,5 +97,18 @@ public class PlayerShoot : MonoBehaviour
     public void UpgradeDamage(int level)
     {
         damage = level;
+    }
+
+    public void SwitchCanShoot(bool value)
+    {
+        canShoot = value;
+    }
+
+    public void OnSelectShip(Transform t)
+    {
+        shootPosition = t.Find("shootPosition");
+        SwitchCanShoot(true);
+
+        shipPosition = shootPosition.parent;
     }
 }

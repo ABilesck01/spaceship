@@ -8,6 +8,7 @@ public class BossShoot : MonoBehaviour
     [SerializeField] private float timeBtwShoots = .75f;
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform shootPosition;
+    [SerializeField] private AudioSource shootSound;
     [SerializeField] private LayerMask player;
 
     private float timer;
@@ -34,6 +35,7 @@ public class BossShoot : MonoBehaviour
         {
             var projectile = Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
             projectile.Damage = damage;
+            shootSound?.Play();
         }
         catch (System.Exception)
         {

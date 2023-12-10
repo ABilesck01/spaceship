@@ -10,6 +10,7 @@ public class BasicEnemy : SpaceObject, IHealth
     [SerializeField] private float TimeBtwShoots = .75f;
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform shootPosition;
+    [SerializeField] private AudioSource shootSound;
 
     private float timer;
 
@@ -23,7 +24,10 @@ public class BasicEnemy : SpaceObject, IHealth
         health -= damage;
         if(health <= 0) 
         {
-            GameManager.Current.Score += score;
+            if (GameManager.Current != null)
+                GameManager.Current.Score += (int)score;
+            else
+                CampaingManager.Current.Score += (int)score;
             Destroy(gameObject);
         }
     }
@@ -52,5 +56,6 @@ public class BasicEnemy : SpaceObject, IHealth
     {
         var projectile = Instantiate(projectilePrefab, shootPosition.position, shootPosition.rotation);
         projectile.Damage = damage;
+        shootSound?.Play();
     }
 }

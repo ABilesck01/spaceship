@@ -17,7 +17,7 @@ public class PlayerUpgradesController : MonoBehaviour
 
 	private bool canUpgrade;
 
-	public static event EventHandler OnSelectUpgrade;
+	public static event EventHandler<Upgrade> OnSelectUpgrade;
 
     public void SelectFirstUpgrade(InputAction.CallbackContext ctx)
 	{
@@ -50,26 +50,51 @@ public class PlayerUpgradesController : MonoBehaviour
             selectedUpgrades = null;
             upgradesView.Hide();
 
-            OnSelectUpgrade?.Invoke(this, EventArgs.Empty);
+            OnSelectUpgrade?.Invoke(this, null);
         }
     }
 
     private void Upgrade(int index)
 	{
 		selectedUpgrades[index].UpgradeLevel();
+		OnSelectUpgrade?.Invoke(this, selectedUpgrades[index]);
 		canUpgrade = false;
-		selectedUpgrades = null;
 		upgradesView.Hide();
 
-		OnSelectUpgrade?.Invoke(this, EventArgs.Empty);
+		selectedUpgrades = null;
 
+    }
+
+    private void GetData()
+    {
+        MissionProgression mp = new MissionProgression();
+        mp.GetData();
+        Debug.Log(mp.upgrades.Count);
+        foreach (var item in mp.upgrades)
+        {
+            Debug.Log(item);
+            for (int i = 0; i < upgrades.Length; i++)
+            {
+                if (this.upgrades[i].UpgradeName.Equals(item))
+                {
+                    this.upgrades[i].UpgradeLevel();
+                }
+            }
+        }
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnEnable()
     {
         BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        
     }
 
+    
     private void OnDisable()
     {
         BossHealth.OnBossDeath -= BossHealth_OnBossDeath;
@@ -90,6 +115,12 @@ public class PlayerUpgradesController : MonoBehaviour
 		canUpgrade = true;
         upgradesView.ShowUpgrades(selectedUpgrades);
     }
+
+    public void OnPlayerReady(Transform playerTransform)
+    {
+        GetData();
+		playerHealth = playerTransform.GetComponent<PlayerHealth>();
+    }
 }
 
 [Serializable]
@@ -99,7 +130,15 @@ public class Upgrade
 	[SerializeField, TextArea(2,10)]private string upgradeDescription;
 	[SerializeField] private Sprite upgradeIcon;
 	[SerializeField, Tooltip("Zero for infinity")] private int maxLevel;
-	public UnityEvent<int> OnUpgrade;
+    [SerializeField] private bool isSaveble;
+
+    public bool IsSaveble
+    {
+        get { return isSaveble; }
+        set { isSaveble = value; }
+    }
+
+    public UnityEvent<int> OnUpgrade;
 
 	private int currentLevel = 1;
 

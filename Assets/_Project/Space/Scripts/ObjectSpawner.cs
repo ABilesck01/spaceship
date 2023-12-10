@@ -8,11 +8,13 @@ public class ObjectSpawner : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnTick += GameManager_OnTick;
+        CampaingManager.OnTick += GameManager_OnTick;
     }
 
     private void OnDestroy()
     {
         GameManager.OnTick -= GameManager_OnTick;
+        CampaingManager.OnTick -= GameManager_OnTick;
     }
 
     private void GameManager_OnTick(object sender, System.EventArgs e)

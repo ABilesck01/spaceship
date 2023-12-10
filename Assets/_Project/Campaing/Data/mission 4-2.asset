@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cc8908782bd554fb0d4721331c3128, type: 3}
+  m_Name: mission 4-2
+  m_EditorClassIdentifier: 
+  missionName: Operation Decisive Duel
+  briefing: Target the command ship, Ascendant Wrath. This is a riskier approach,
+    as it's guarded by elite Imperial pilots, but taking out the flagship could demoralize
+    the Empire and scatter their forces. Speed and agility will be your greatest
+    assets in this daring mission.
+  ending: Despite your best efforts, the mission takes a turn for the worse. The
+    Republic's assault falters, and both the Starbase and Ascendant Wrath prove more
+    formidable than expected. As Earth falls to the Galactic Empire, you witness
+    the consequences of your decision, setting the stage for a grim future under
+    imperial rule.
+  scoreToWin: 2500
+  missionIndex: 3
+  boss: {fileID: 9075660658897422346, guid: 19c87b98df26ce04c98978b8a299b680, type: 3}
+  secondChoice: {fileID: 0}

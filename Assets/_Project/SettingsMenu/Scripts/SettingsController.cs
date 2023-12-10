@@ -16,7 +16,7 @@ public class SettingsController : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.current.firstSelectedGameObject = firstSelected;
+        EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void ToggleQuality(int index)

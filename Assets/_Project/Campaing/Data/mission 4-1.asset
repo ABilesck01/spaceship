@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cc8908782bd554fb0d4721331c3128, type: 3}
+  m_Name: mission 4-1
+  m_EditorClassIdentifier: 
+  missionName: Operation Bold Strike
+  briefing: Your mission is to lead a direct assault on the Imperial Starbase. The
+    Starbase is a linchpin in the Empire's strategy, and destroying it would severely
+    cripple their forces. However, the Starbase is heavily fortified, and success
+    will require precision and firepower.
+  ending: You successfully execute your chosen strategy, either crippling the Imperial
+    Starbase or destroying Ascendant Wrath. The Republic forces seize the opportunity,
+    turning the tide of the battle. The Galactic Empire retreats, and Earth is saved.
+  scoreToWin: 2500
+  missionIndex: 3
+  boss: {fileID: 9075660658897422346, guid: 123a2b80f96ef4346823253ecb2e5cff, type: 3}
+  secondChoice: {fileID: 11400000, guid: 0ecdc05a9e2e7234c97432b5fb81edc2, type: 2}

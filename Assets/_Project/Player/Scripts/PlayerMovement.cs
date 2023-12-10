@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float orbitAngle = 270;
     private Vector2 moveInput;
-    private bool canMove = true;
+    private bool canMove = false;
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -38,5 +38,11 @@ public class PlayerMovement : MonoBehaviour
     public void SwitchMove(bool value)
     {
         canMove = value;
+    }
+
+    public void OnSelectShip(Transform t)
+    {
+        ship = t.GetComponent<Rigidbody>();
+        SwitchMove(true);
     }
 }
