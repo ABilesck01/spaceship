@@ -13,6 +13,10 @@ public class PlayerCustomization : MonoBehaviour
     [SerializeField] private GameObject screen;
     [SerializeField] private TextMeshProUGUI txtShipName;
     [SerializeField] private Transform shipPreview;
+    [Header("Buttons")]
+    [SerializeField] private Button btnSelectLeft;
+    [SerializeField] private Button btnSelectRight;
+    [SerializeField] private Button btnStart;
     [Space]
     [SerializeField] private Slider redSlider;
     [SerializeField] private Slider greenSlider;
@@ -63,18 +67,26 @@ public class PlayerCustomization : MonoBehaviour
 
         if(callbackContext.started)
         {
-            hasSelected = true;
-            screen.SetActive(false);
-            Transform s = Instantiate(ships[currentShip].shipPrefab, transform);
-            s.GetComponentInChildren<PlayerVisual>().SetColors(playerVisualDatas);
-            OnShipSelected?.Invoke(s);
-            OnPlayerReady?.Invoke(this, EventArgs.Empty);
+            SelectShip();
         }
     }
 
+    private void SelectShip()
+    {
+        hasSelected = true;
+        screen.SetActive(false);
+        Transform s = Instantiate(ships[currentShip].shipPrefab, transform);
+        s.GetComponentInChildren<PlayerVisual>().SetColors(playerVisualDatas);
+        OnShipSelected?.Invoke(s);
+        OnPlayerReady?.Invoke(this, EventArgs.Empty);
+    }
 
     private void Start()
     {
+        btnSelectLeft.onClick.AddListener(() => Chose(-1));
+        btnSelectRight.onClick.AddListener(() => Chose(1));
+        btnStart.onClick.AddListener(SelectShip);
+
         ShowShip();
     }
 

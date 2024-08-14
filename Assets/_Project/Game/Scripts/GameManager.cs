@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
         playerReady = 0;
     }
 
+    private void Start()
+    {
+        StartGame();
+    }
+
     private void OnEnable()
     {
         PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
@@ -98,14 +103,14 @@ public class GameManager : MonoBehaviour
 
     private void PlayerCustomization_OnPlayerReady(object sender, EventArgs e)
     {
-        playerReady++;
-        if(playerReady >= playersAmount)
-        {
-            playerInputManager.DisableJoining();
-            SwitchTick(true);
-            OnStartGame?.Invoke(this, EventArgs.Empty);
-            Score = 0;
-        }
+        //playerReady++;
+        //if(playerReady >= playersAmount)
+        //{
+        //}
+        playerInputManager.DisableJoining();
+        SwitchTick(true);
+        OnStartGame?.Invoke(this, EventArgs.Empty);
+        Score = 0;
     }
 
     private void BossHealth_OnBossDeath(object sender, EventArgs e)
@@ -140,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        playersAmount++;
+        //playersAmount++;
 
         if(hasStarted) return;
 

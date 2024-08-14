@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class PlayerUpgradesController : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class PlayerUpgradesController : MonoBehaviour
 	[SerializeField] private PlayerUpgradesView upgradesView;
 	[Space]
 	[SerializeField] private Upgrade[] upgrades;
+
+	[SerializeField] private Button upgrade01;
+	[SerializeField] private Button upgrade02;
+	[SerializeField] private Button upgrade03;
 	
 	private Upgrade[] selectedUpgrades;
 
@@ -45,18 +50,25 @@ public class PlayerUpgradesController : MonoBehaviour
         {
             if (!canUpgrade) return;
 
-			playerHealth.ResetHealth();
-            canUpgrade = false;
-            selectedUpgrades = null;
-            upgradesView.Hide();
-
-            OnSelectUpgrade?.Invoke(this, null);
+            RestoreShip();
         }
+    }
+
+    private void RestoreShip()
+    {
+        playerHealth.ResetHealth();
+        canUpgrade = false;
+        selectedUpgrades = null;
+        upgradesView.Hide();
+
+        OnSelectUpgrade?.Invoke(this, null);
     }
 
     private void Upgrade(int index)
 	{
-		selectedUpgrades[index].UpgradeLevel();
+        if (!canUpgrade) return;
+
+        selectedUpgrades[index].UpgradeLevel();
 		OnSelectUpgrade?.Invoke(this, selectedUpgrades[index]);
 		canUpgrade = false;
 		upgradesView.Hide();
@@ -85,7 +97,9 @@ public class PlayerUpgradesController : MonoBehaviour
 
     private void Start()
     {
-        
+        upgrade01.onClick.AddListener(() => Upgrade(0));
+        upgrade02.onClick.AddListener(() => Upgrade(1));
+        upgrade03.onClick.AddListener(RestoreShip);
     }
 
     private void OnEnable()

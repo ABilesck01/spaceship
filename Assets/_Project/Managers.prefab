@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 1
   m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
@@ -1649,6 +1649,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBtwTicks: 1
   speed: 15
+  warp: {fileID: 0}
+  playerInputManager: {fileID: 0}
   txtScore: {fileID: 6023990094371417848}
 --- !u!1 &5257211637122760526
 GameObject:
